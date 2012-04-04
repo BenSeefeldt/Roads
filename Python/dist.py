@@ -1,5 +1,7 @@
 import math
 
+#THat is unclean coding Ben.
+
 #Contains the distance formulas. Each take in a vector(list) and
 # will return a single number for an answer
 def euclidiandist(r1,r2):

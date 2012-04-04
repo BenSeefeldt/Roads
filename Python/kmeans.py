@@ -8,6 +8,8 @@ import Image
 from time import time
 #INPUT is file and k
 
+#This code is going to go through some dramatic changes in the next couple days.
+
 data=[]
 data_labels=[]
 classes=[]

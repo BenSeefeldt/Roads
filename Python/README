@@ -1,1 +1,7 @@
 The main directory for all of the python code.
+
+Included:
+
+dist.py-Distance measures
+kmean.py-Contains the main kmeans algorithm.
+road.py-The main running method of the program.

@@ -1,3 +1,24 @@
 ROADS
 
 More to come...
+
+Java code checklist:
+_: Cluster.java
+	centroid	double[] 
+	data		double[][]
+	getCentriod()	double[]
+	setCentroid(double[] centroid)
+	getData()	double[][]
+	setData(double[][] data)
+_: Distance.java
+	euc(double[] a, double[] b)
+	cos(double[] a, double[] b)
+_: KMeans.java
+	kmeans(double[][] data, int k, String distanceMeasure)
+	
+_: Road.java
+	main()
+	run()
+	-load data
+	-get clusters
+	-display output

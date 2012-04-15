@@ -73,7 +73,7 @@ def main():
   centroids=[]
   clusters=[]
   if not options.parallel_run:
-    print "Running Serial Exeuction."
+    print "Running Serial Exeuction."g
     a=time()
     centroids,clusters=serial_kmeans(data,options.k,dist_measure)  
     print "Serial execution completed in "+str(time()-a)+" sec."

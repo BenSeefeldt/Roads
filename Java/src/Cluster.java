@@ -35,6 +35,21 @@ public class Cluster {
 	 */
 	private int size = 0;
 
+	private int numInstances;
+
+	/**
+	 * the indices of the data in this cluster
+	 */
+	private int[] pointers;
+
+
+	/**
+	 * 
+	 */
+	public Cluster(int numInstances) {
+		this.numInstances = numInstances;
+		clear();
+	}
 
 	/**
 	 * @return the centroid
@@ -72,8 +87,9 @@ public class Cluster {
 	 * void
 	 * @param instance
 	 */
-	public void addData(double[] instance){
+	public void addData(double[] instance, int index){
 		data[size] = instance;
+		pointers[size] = index;
 		size++;
 	}
 	
@@ -90,8 +106,15 @@ public class Cluster {
 	}
 	
 	public void clear(){
-		setData(new double[data.length][]);
+		setData(new double[numInstances][]);
+		pointers = new int[numInstances];
 		size = 0;
+	}
+	public int[] pointerList(){
+		return pointers;
+	}
+	public void addPointer(int index){
+		pointers[size]=index;
 	}
 	
 

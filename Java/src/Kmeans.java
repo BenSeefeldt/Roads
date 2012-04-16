@@ -90,9 +90,10 @@ public class Kmeans {
 		while(i < k);
 		
 		//assign centroids to element 0 or cluster arrays
-		for(int z=0; z < k; z++){
-			cluster[i] = new Cluster();
-			cluster[i].setCentroid(data[centroid[i]]);
+		for(int j=0; j < k; j++){
+			System.out.println(j);
+			cluster[j] = new Cluster(numInstances);
+			cluster[j].setCentroid(data[centroid[j]]);
 		}
 	}
  
@@ -123,7 +124,7 @@ public class Kmeans {
 						closestCluster = j;
 					}
 				}
-				cluster[closestCluster].addData(data[i]);
+				cluster[closestCluster].addData(data[i], i);
 			}
 		}
 		/*
@@ -141,7 +142,7 @@ public class Kmeans {
 						closestCluster = j;
 					}
 				}
-				cluster[closestCluster].addData(data[i]);
+				cluster[closestCluster].addData(data[i], i);
 			}
 		}
 	
@@ -154,7 +155,8 @@ public class Kmeans {
 		for(int i = 0; i < k; i++){
 			double[] newCentroid = new double[numAttributes];
 			for(int j = 0; j < numAttributes; j++){
-				newCentroid[i] = cluster[i].mean(j);
+				//System.out.println("i: "+i+", j: "+j);
+				newCentroid[j] = cluster[i].mean(j);
 			}
 			cluster[i].setCentroid(newCentroid);
 		}	
@@ -167,4 +169,10 @@ public class Kmeans {
 		}
 		return difference;
 	}
+	
+	public Cluster[] getClusters(){
+		return cluster;
+	}
+
+
 }

@@ -21,9 +21,20 @@ public class Cluster {
 	private double[] centroid;
 	
 	/**
+	 * 
+	 */
+	private double[] oldCentroid;
+	
+	/**
 	 * the data structure holding the data points in the cluster
 	 */
 	private double[][] data;
+	
+	/**
+	 * the size and current index for the last piece of data in the cluster
+	 */
+	private int size = 0;
+
 
 	/**
 	 * @return the centroid
@@ -33,10 +44,13 @@ public class Cluster {
 	}
 
 	/**
+	 * sets a new centroid and assigns the old one to oldCentroid
 	 * @param centroid the centroid to set
 	 */
-	private void setCentroid(double[] centroid) {
+	public void setCentroid(double[] centroid) {
+		oldCentroid = this.centroid;
 		this.centroid = centroid;
+		
 	}
 
 	/**
@@ -49,8 +63,35 @@ public class Cluster {
 	/**
 	 * @param data the data to set
 	 */
-	private void setData(double[][] data) {
+	public void setData(double[][] data) {
 		this.data = data;
+	}
+	
+	/**
+	 * this method adds an instance of data to the cluster
+	 * void
+	 * @param instance
+	 */
+	public void addData(double[] instance){
+		data[size] = instance;
+		size++;
+	}
+	
+	public double mean(int attribute){
+		double sum = 0;
+		for(int i =0; i< data[0].length; i++){
+			sum += data[i][attribute];
+		}
+		return sum / data[attribute].length;
+	}
+	
+	public double centroidDifference(){
+		return Distance.euclidian(oldCentroid, centroid);
+	}
+	
+	public void clear(){
+		setData(new double[data.length][]);
+		size = 0;
 	}
 	
 

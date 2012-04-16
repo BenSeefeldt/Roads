@@ -24,9 +24,13 @@ public class Distance {
 		double lengthx = 0;
 		double lengthy = 0;
 		for(int i =0; i < a.length; i++){
-			
+			dist+= a[i]*b[i];
+			lengthx += a[i]*a[i];
+			lengthy += b[i]*b[i];
 		}
-		return dist;
+		lengthx = Math.sqrt(lengthx);
+		lengthy = Math.sqrt(lengthy);
+		return 1-(dist/(lengthx*lengthy));
 	}
 	
 

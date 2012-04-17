@@ -9,20 +9,10 @@ import java.util.Random;
  *
  */
 public class Kmeans {
-/*
- * _: KMeans.java
-	kmeans(double[][] data, int k, String distanceMeasure)
- * 
- * 	public void kMeansEuc(int k){
-		this.k = k;
-		findInitCentroids();
-		do{
-			assignPointsEuc();
-			recomputeCentroid();
-		}
-		while(!compareCentriods());
-	}
- */
+
+	/**
+	 * the array of Cluster objects that hold the clusters for the kmeans algorithm
+	 */
 	private Cluster[] cluster;
 	/**
 	 * the number of clusters
@@ -40,13 +30,19 @@ public class Kmeans {
 	 */
 	private int dm=0;
 	
+	/**
+	 * variables that hold the number of attributes and instances in the data set
+	 */
 	private int numAttributes, numInstances;
 	
 	/**
-	 * 
-	 * @param data
-	 * @param k
-	 * @param distanceMeasure
+	 * the Kmeans algorithm. it takes a data set and clusters it into k different clusters 
+	 * using a distance measure provided by the user
+	 * @param data the data set formatted as an array of double arrays 
+	 * 			where each array is a data sample
+	 * @param k the integer value of the desired amount of clusters
+	 * @param distanceMeasure the name of the distance measure to be used in the k means algorithm
+	 * 			this implementation supports "euclidian", and "cosine" with cosine as the default
 	 */
 	
 	public Kmeans(double[][] data, int k, String distanceMeasure){
@@ -67,7 +63,8 @@ public class Kmeans {
 	}
 
 	/**
-	 * this method randomly finds k unique centroids to be initially used in the k means algorithm
+	 * this method randomly finds k unique centroids to be initially used in the 
+	 * k means algorithm. it also initializes the clusters
 	 */
  public void findInitCentroids(){
 		Random r = new Random();
@@ -97,10 +94,13 @@ public class Kmeans {
 		}
 	}
  
-	/**
-	 * this method goes through the data set and assigns data samples the the cluster with the closest 
-	 * centroid using euclidean distance 
-	 */
+ /**
+  * this method goes through the data set and assigns data samples to 
+  * the cluster with the closest cluster using the given distance measure
+  * void
+  * @param dm the distance measure as an enumerated type
+  * 		1 = euclidian; 0 = cosine
+  */
 	public void assignPoints(int dm){
 		/*
 		 * clean clusters
@@ -149,7 +149,8 @@ public class Kmeans {
 	}
  
 	/**
-	 * this method recomputes the centroids of the clusters by finding the average of all of the attributes
+	 * this method recomputes the centroids of the clusters by finding the 
+	 * average values of all of the attributes and using them as the new centroid
 	 */
 	public void recomputeCentroid(){
 		for(int i = 0; i < k; i++){
@@ -162,6 +163,13 @@ public class Kmeans {
 		}	
 	}
 
+	/**
+	 * this method finds the sum of all of the differences between new and 
+	 * old centroids
+	 * double
+	 * @return the double value of the sum of all of the differences between 
+	 * 			previous and current centroids
+	 */
 	public double compareCentroids(){
 		int difference = 0;
 		for(int i =0; i<k; i++){
@@ -170,6 +178,11 @@ public class Kmeans {
 		return difference;
 	}
 	
+	/**
+	 * this method returns the Clusters found by the kmeans algorithm
+	 * Cluster[]
+	 * @return the array of Clusters
+	 */
 	public Cluster[] getClusters(){
 		return cluster;
 	}

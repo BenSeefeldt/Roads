@@ -95,10 +95,10 @@ public class Cluster {
 	
 	public double mean(int attribute){
 		double sum = 0;
-		for(int i =0; i< data[0].length; i++){
+		for(int i =0; i< size; i++){
 			sum += data[i][attribute];
 		}
-		return sum / data[attribute].length;
+		return sum / size;
 	}
 	
 	public double centroidDifference(){
@@ -110,9 +110,11 @@ public class Cluster {
 		pointers = new int[numInstances];
 		size = 0;
 	}
+	
 	public int[] pointerList(){
 		return pointers;
 	}
+	
 	public void addPointer(int index){
 		pointers[size]=index;
 	}

@@ -14,6 +14,12 @@ import javax.imageio.ImageIO;
  */
 public class Road {
 	
+	/**
+	 * this method converts a buffered image into a double[][] format 
+	 * double[][]
+	 * @param bi the buffered image
+	 * @return the array of RGB values of each pixel in an array
+	 */
 	public double[][] importImage(BufferedImage bi){
 		int pixels = bi.getHeight()*bi.getWidth();
 		int width = bi.getWidth();
@@ -28,12 +34,20 @@ public class Road {
 		return arffData;
 	}
 	
-	public BufferedImage drawImage(BufferedImage source,double[][] data, int height){
+	/**
+	 * this method converts a double[][] of each pixel's rgb value into a buffered image
+	 * BufferedImage
+	 * @param source the source image that the double[][] was created from
+	 * @param data the array of pixels with their RGB values
+	 * @return the dataset reconstructed into a buffered image
+	 */
+	public BufferedImage drawImage(BufferedImage source,double[][] data){
 		BufferedImage bi = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
+		int width = source.getWidth();
 		int pixels = data.length;
 		for(int i=0; i < pixels; i++){
-			int y = i/height;
-			int x = i%height;
+			int y = i/width;
+			int x = i%width;
 			//System.out.println(i);
 			bi.setRGB(x, y, arrayToColor(data[i]));
 			
@@ -41,6 +55,12 @@ public class Road {
 		return bi;
 	}
 	
+	/**
+	 * 
+	 * double[]
+	 * @param ARGB
+	 * @return
+	 */
 	public double[] colorToArray(int ARGB){
 		double[] color = new double[3];
 		int alpha = (ARGB >> 24) & 0xFF;
@@ -86,13 +106,13 @@ public class Road {
 		Road r = new Road();
 		Kmeans K;
 		BufferedImage bi = null;
-		double[][] rgb = new double[3][3];
+		double[][] rgb = new double[4][3];
 		rgb[0][0] = 255; 
 		rgb[1][1] = 255;
 		rgb[2][2] = 255;
-		int k = 2;
+		int k = 5;
 		try {
-			 bi = ImageIO.read(new File("/home/f09/kahorton/workspace/Roads/src/BasicRoad.jpg"));
+			 bi = ImageIO.read(new File("/home/f09/kahorton/workspace/Roads/src/road.jpg"));
 
 		        long startTime = System.currentTimeMillis();
 			double[][] data = r.importImage(bi);
@@ -109,7 +129,7 @@ public class Road {
 					data[pixels[j]] = cluster[i].getCentroid();
 				}
 			}
-			BufferedImage test = r.drawImage(bi, data, bi.getWidth());
+			BufferedImage test = r.drawImage(bi, data);
 			
 		    File outputfile = new File("/home/f09/kahorton/workspace/Roads/src/testOut.jpg");
 		    ImageIO.write(test, "jpg", outputfile);
